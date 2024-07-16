@@ -1,18 +1,4 @@
-import express from "express";
-import { Ingredient } from "./types";
-import ingredientsRouter from "./routes/ingredients";
-const app = express();
-
-app.use(express.json());
-app.use("/api/ingredients", ingredientsRouter);
-
-/*
-app.get("/api/ingredients", (req, res) => {
-    //console.log(req.body);
-
-    res.json(ingredientsData);
-});
-*/
+import app from "./app";
 
 const PORT = 3000;
 app.listen(PORT, () => {
