@@ -10,14 +10,16 @@ todo...
 
 ## Work hours
 
-| Date | time | Work done  |
-| :----:|:-----| :-----|
-| 10.07 | 1 | Added skeleton backend, skeleton frontend, listed features |
-| added   | 0   | | 
+| Date  | time | Work done                                                                      |
+| :---: | :--- | :----------------------------------------------------------------------------- |
+| 10.07 | 1    | Added skeleton backend, skeleton frontend, listed features                     |
+| 16.07 | 3    | Implemented view, add, edit in ingredients api, setup jest for backend testing |
+| added | 4    |                                                                                |
 
 ## Features
 
 - [ ] Nutrition facts
+
   - [ ] Can get nutrition facts for available foods
   - [ ] Can add nutrition facts for new foods
   - [ ] Can view nutrition facts on the frontend
@@ -29,7 +31,7 @@ todo...
     - [ ] User can delete a food entry
     - [ ] Food log is saved into a database
   - [ ] User can view their food intake
-  - [ ] User can construct foods from 'ingredients', that use the available nutrition facts. 
+  - [ ] User can construct foods from 'ingredients', that use the available nutrition facts.
   - [ ] Food intake is shown to user via a graph
   - [ ] User can keep a log of their weight daily
   - [ ] Weight is shown to user via a graph
