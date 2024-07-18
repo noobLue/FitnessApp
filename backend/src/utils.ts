@@ -21,7 +21,7 @@ const parseString = (str: unknown): string => {
 };
 
 const parseNumber = (num: unknown): number => {
-  if (!num || !isNumber(num)) throw new Error("Failed to parse number");
+  if (!isNumber(num)) throw new Error("Failed to parse number");
 
   return num;
 };

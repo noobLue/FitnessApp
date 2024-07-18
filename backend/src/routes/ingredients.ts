@@ -20,30 +20,36 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.body);
-
   try {
     const newIngredient = toNewIngredient(req.body);
 
     const ingredient = AddIngredient(newIngredient);
 
-    res.json(ingredient);
+    res.status(201).json(ingredient);
   } catch (e: unknown) {
-    res.json({ error: "unknown error" });
+    if (e instanceof Error) {
+      res.status(400).json({ error: e.message });
+    } else {
+      res.status(400).json({ message: "unknown error" });
+    }
   }
 });
 
 router.put("/:id", (req, res) => {
-  const id = Number(req.params.id);
-
   try {
+    const id = Number(req.params.id);
+
     const newIngredient = toNewIngredient(req.body);
 
     const ingredient = UpdateIngredient(id, newIngredient);
 
-    res.json(ingredient);
+    res.status(201).json(ingredient);
   } catch (e: unknown) {
-    res.json({ error: "unknown error" });
+    if (e instanceof Error) {
+      res.status(400).json({ error: e.message });
+    } else {
+      res.status(400).json({ message: "unknown error" });
+    }
   }
 });
 

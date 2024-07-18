@@ -11,6 +11,10 @@ let data: Ingredient[] = [
   },
 ];
 
+export const SetIngredients = (ingredients: Ingredient[]) => {
+  data = ingredients;
+};
+
 export const AddIngredient = (ingredient: NewIngredient): Ingredient => {
   const i: Ingredient = {
     id: data.length + 1,
@@ -24,12 +28,14 @@ export const AddIngredient = (ingredient: NewIngredient): Ingredient => {
 
 export const UpdateIngredient = (id: number, ingredient: NewIngredient): Ingredient | undefined => {
   const found = data.find((i) => i.id === id);
+  const fullIngredient = { ...ingredient, id };
 
   if (found) {
-    data = data.map((i) => (i.id === id ? { ...ingredient, id } : i));
+    data = data.map((i) => (i.id === id ? fullIngredient : i));
+    return fullIngredient;
+  } else {
+    return undefined;
   }
-
-  return found;
 };
 
 export const GetIngredients = (): Ingredient[] => {
