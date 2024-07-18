@@ -10,7 +10,7 @@ router.get("/", (_req, res) => {
 
 router.get("/:id", (req, res) => {
   const ingredients = GetIngredients();
-  let ingredient = ingredients.find((i) => i.id === Number(req.params.id));
+  const ingredient = ingredients.find((i) => i.id === Number(req.params.id));
 
   if (ingredient) {
     res.json(ingredient);

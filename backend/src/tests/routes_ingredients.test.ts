@@ -2,39 +2,15 @@ import app from "../app";
 import supertest from "supertest";
 import { Ingredient, NewIngredient } from "../types";
 import { SetIngredients } from "../data/ingredients";
+import { default_ingredients, example_ingredient, invalid_ingredient } from "./ingredient_test_helper";
 
 const api = supertest(app);
 
 const ingredients_url = "/api/ingredients";
 
-const default_ingredient_id = 1;
-const default_ingredient: NewIngredient = {
-  name: "Taysmaito",
-  calories: 64,
-  fat: 2.4,
-  carbohydrates: 4.8,
-  protein: 3.4,
-};
-
-const example_ingredient: NewIngredient = {
-  name: "Kevytmaito",
-  calories: 47,
-  fat: 1.5,
-  carbohydrates: 4.8,
-  protein: 3.5,
-};
-
-const invalid_ingredient = {
-  name: "Fake product",
-  calories: 99,
-  protein_shaker: "included",
-  sponsor: "formula1",
-};
-
 describe("ingredients api", () => {
   beforeEach(() => {
-    const ingredient: Ingredient = { id: default_ingredient_id, ...default_ingredient };
-    SetIngredients([ingredient]);
+    SetIngredients(default_ingredients);
   });
 
   test("ingredients api returns json response", async () => {
@@ -49,8 +25,9 @@ describe("ingredients api", () => {
 
     expect(res.body.length).toBeGreaterThan(0);
 
-    const { id, ...rest } = res.body[0];
-    expect(rest).toMatchObject(default_ingredient);
+    const rest: Ingredient = res.body[0];
+
+    expect(rest).toMatchObject(default_ingredients[0]);
   });
 
   test("ingredient is added on post", async () => {
@@ -72,7 +49,7 @@ describe("ingredients api", () => {
 
   test("ingredient is updated", async () => {
     const ingredient: NewIngredient = { name: "uusmaito", calories: 55, fat: 0, carbohydrates: 2, protein: 5 };
-    const res = await api.put(`${ingredients_url}/${default_ingredient_id}`).send(ingredient).expect(201);
+    const res = await api.put(`${ingredients_url}/${default_ingredients[0].id}`).send(ingredient).expect(201);
 
     let { id, ...rest } = res.body;
     expect(rest).toMatchObject(ingredient);

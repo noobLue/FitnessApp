@@ -1,5 +1,4 @@
 import express from "express";
-import { Ingredient } from "./types";
 import ingredientsRouter from "./routes/ingredients";
 const app = express();
 

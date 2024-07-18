@@ -15,15 +15,21 @@ const isObject = (body: unknown): body is object => {
 };
 
 const parseString = (str: unknown): string => {
-  if (!str || !isString(str)) throw new Error("Failed to parse string");
+  if (!str || !isString(str)) throw new Error(`Failed to parse string '${str}'`);
 
   return str;
 };
 
 const parseNumber = (num: unknown): number => {
-  if (!isNumber(num)) throw new Error("Failed to parse number");
+  if (!isNumber(num)) throw new Error(`Failed to parse number '${num}'`);
 
   return num;
+};
+
+const parsePositiveNumber = (num: unknown): number => {
+  const num2 = parseNumber(num);
+  if (num2 < 0) throw new Error(`Number ${num} was supposed to be positive`);
+  return num2;
 };
 
 export const toNewIngredient = (body: unknown): NewIngredient => {
@@ -40,10 +46,10 @@ export const toNewIngredient = (body: unknown): NewIngredient => {
 
   const newIngredient: NewIngredient = {
     name: parseString(body.name),
-    calories: parseNumber(body.calories),
-    fat: parseNumber(body.fat),
-    carbohydrates: parseNumber(body.carbohydrates),
-    protein: parseNumber(body.protein),
+    calories: parsePositiveNumber(body.calories),
+    fat: parsePositiveNumber(body.fat),
+    carbohydrates: parsePositiveNumber(body.carbohydrates),
+    protein: parsePositiveNumber(body.protein),
   };
 
   return newIngredient;
